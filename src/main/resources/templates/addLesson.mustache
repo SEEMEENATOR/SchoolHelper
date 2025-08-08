@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить урок</title>
+    <link rel="stylesheet" href="/css/styles_add_lessons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+        .task, .test {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            position: relative;
+        }
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: #ff0000;
+        }
+        .test-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .test-option input[type="text"] {
+            flex-grow: 1;
+            margin-right: 10px;
+            padding: 8px;
+        }
+        .test-option .correct-checkbox {
+            margin-left: 10px;
+        }
+        .test-type-select {
+            margin: 10px 0;
+        }
+        #content {
+            height: 300px;
+            margin-bottom: 20px;
+        }
+        .ai-generate-btn {
+    background-color: #5A0DAC;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.ai-generate-btn:hover {
+    background-color: #7d5bbe;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.ai-icon {
+    font-size: 18px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; }
+    100% { opacity: 0.8; }
+}
+        .ai-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+    animation: slideIn 0.5s, fadeOut 0.5s 2.5s;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+    </style>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Добавить урок</h1>
+    <form id="lessonForm">
+        <div class="form-group">
+            <label for="title">Название урока</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="sectionId">Раздел</label>
+            <select id="sectionId" name="sectionId" required>
+                {{#sections}}
+                    <option value="{{id}}">{{title}}</option>
+                {{/sections}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="content">Содержание</label>
+            <div id="contentEditor"></div>
+            <input type="hidden" id="content" name="content">
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn ai-generate-btn" onclick="generateAutoContent()"
+                    title="Автоматически сгенерировать задачи и тесты по теме урока">
+                <span class="ai-icon">✨</span> Создать контент автоматически
+            </button>
+        </div>
+        <h2>Добавить задачи</h2>
+        <button type="button" onclick="addTask()">Добавить задачу</button>
+        <div id="taskContainer"></div>
+
+        <h2>Добавить тесты</h2>
+        <button type="button" onclick="addTest()">Добавить тест</button>
+        <div id="testContainer"></div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn save-btn">Сохранить</button>
+            <button type="button" class="btn cancel-btn" onclick="window.location.href='/teacher/lessons'">Отмена</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Инициализация Quill
+    const quill = new Quill('#contentEditor', {
+        theme: 'snow',
+        placeholder: 'Введите текст урока...',
+        modules: {
+            toolbar: [
+                [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                ['bold', 'italic', 'underline'],
+                [{ 'align': [] }],
+                ['link'],
+                ['image']
+            ]
+        }
+    });
+
+    // Счетчики для задач и тестов
+    let taskCounter = 0;
+    let testCounter = 0;
+
+    // Добавление задачи
+    function addTask() {
+        const taskId = `task_${taskCounter++}`;
+        const taskHtml = `
+            <div class="task" id="${taskId}">
+                <label>Текст задачи</label>
+                <textarea name="taskContents" required></textarea>
+                <label>Правильный ответ</label>
+                <input type="text" name="taskAnswers" required>
+                <button type="button" class="close-btn" onclick="document.getElementById('${taskId}').remove()">×</button>
+            </div>
+        `;
+        document.getElementById('taskContainer').insertAdjacentHTML('beforeend', taskHtml);
+    }
+
+    // Добавление теста
+    function addTest() {
+        const testId = `test_${testCounter++}`;
+        const testHtml = `
+            <div class="test" id="${testId}">
+                <label>Вопрос</label>
+                <textarea name="testQuestions" required></textarea>
+
+                <div class="test-type-select">
+                    <label>Тип вопроса:</label>
+                    <select name="testQuestionTypes" required>
+                        <option value="SINGLE_CHOICE">Один правильный ответ</option>
+                        <option value="MULTIPLE_CHOICE">Несколько правильных ответов</option>
+                    </select>
+                </div>
+
+                <div class="test-options-container" id="options_${testId}">
+                    <div class="test-option">
+                        <input type="text" placeholder="Вариант ответа" required>
+                        <input type="checkbox" class="correct-checkbox">
+                        <button type="button" onclick="this.parentElement.remove()">×</button>
+                    </div>
+                </div>
+
+                <button type="button" onclick="addOption('${testId}')">Добавить вариант</button>
+                <button type="button" class="close-btn" onclick="document.getElementById('${testId}').remove()">×</button>
+            </div>
+        `;
+        document.getElementById('testContainer').insertAdjacentHTML('beforeend', testHtml);
+    }
+
+    // Добавление варианта ответа
+    function addOption(testId) {
+        const optionHtml = `
+            <div class="test-option">
+                <input type="text" placeholder="Вариант ответа" required>
+                <input type="checkbox" class="correct-checkbox">
+                <button type="button" onclick="this.parentElement.remove()">×</button>
+            </div>
+        `;
+        document.getElementById(`options_${testId}`).insertAdjacentHTML('beforeend', optionHtml);
+    }
+
+    // Обработка отправки формы
+    document.getElementById('lessonForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // Сохраняем содержимое редактора
+        document.getElementById('content').value = quill.root.innerHTML;
+
+        // Собираем данные формы
+        const formData = {
+            title: document.getElementById('title').value,
+            sectionId: document.getElementById('sectionId').value,
+            content: document.getElementById('content').value,
+            tasks: [],
+            tests: []
+        };
+
+        // Собираем задачи
+        document.querySelectorAll('.task').forEach(task => {
+            formData.tasks.push({
+                content: task.querySelector('textarea[name="taskContents"]').value,
+                answer: task.querySelector('input[name="taskAnswers"]').value
+            });
+        });
+
+        // Собираем тесты
+        document.querySelectorAll('.test').forEach(test => {
+            const options = [];
+            const correctOptions = [];
+
+            test.querySelectorAll('.test-option').forEach((option, index) => {
+                options.push(option.querySelector('input[type="text"]').value);
+                if (option.querySelector('.correct-checkbox').checked) {
+                    correctOptions.push(index);
+                }
+            });
+
+            formData.tests.push({
+                question: test.querySelector('textarea[name="testQuestions"]').value,
+                questionType: test.querySelector('select[name="testQuestionTypes"]').value,
+                options: options,
+                correctOptions: correctOptions
+            });
+        });
+
+        // Отправка данных на сервер
+        try {
+            const response = await axios.post('/teacher/lessons/add', formData);
+            if (response.data.redirect) {
+                window.location.href = response.data.redirect;
+            }
+        } catch (error) {
+            alert('Ошибка при сохранении урока: ' + error.response?.data?.message || error.message);
+        }
+    });
+    async function generateAutoContent() {
+    const title = document.getElementById('title').value;
+    if (!title.trim()) {
+        alert("Сначала введите название урока (тему)");
+        return;
+    }
+
+    const btn = document.querySelector('.ai-generate-btn');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<span class="ai-icon">⏳</span> Генерация...';
+    btn.disabled = true;
+
+    try {
+        const response = await axios.post('/teacher/lessons/generate-content', { topic: title });
+        const { tasks, tests } = response.data;
+
+        // Очищаем существующие задачи и тесты
+        document.getElementById('taskContainer').innerHTML = '';
+        document.getElementById('testContainer').innerHTML = '';
+        taskCounter = 0;
+        testCounter = 0;
+
+        // Добавляем сгенерированные задачи
+        tasks.forEach(task => {
+            addTask();
+            const lastTask = document.querySelectorAll('.task')[document.querySelectorAll('.task').length - 1];
+            lastTask.querySelector('textarea[name="taskContents"]').value = task.content;
+            lastTask.querySelector('input[name="taskAnswers"]').value = task.answer;
+        });
+
+        // Добавляем сгенерированные тесты
+        tests.forEach(test => {
+            addTest();
+            const lastTest = document.querySelectorAll('.test')[document.querySelectorAll('.test').length - 1];
+            lastTest.querySelector('textarea[name="testQuestions"]').value = test.question;
+            lastTest.querySelector('select[name="testQuestionTypes"]').value = test.questionType;
+
+            const optionsContainer = lastTest.querySelector('.test-options-container');
+            optionsContainer.innerHTML = '';
+
+            test.options.forEach((optionText, idx) => {
+                const isCorrect = test.correctOptions.includes(idx);
+                const optionHtml =
+                    `<div class="test-option">
+                        <input type="text" placeholder="Вариант ответа" value="${optionText}" required>
+                        <input type="checkbox" class="correct-checkbox" ${isCorrect ? 'checked' : ''}>
+                        <button type="button" onclick="this.parentElement.remove()">×</button>
+                    </div>`;
+                optionsContainer.insertAdjacentHTML('beforeend', optionHtml);
+            });
+        });
+
+        // Показываем уведомление об успехе
+        const notification = document.createElement('div');
+        notification.className = 'ai-notification';
+        notification.textContent = 'Контент успешно сгенерирован!';
+        document.querySelector('.container').appendChild(notification);
+        setTimeout(() => notification.remove(), 3000);
+
+    } catch (err) {
+        alert('Ошибка при генерации: ' + (err.response?.data?.message || err.message));
+    } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+    }
+}
+
+</script>
+</body>
+</html>

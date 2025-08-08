@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Profile</title>
+    <link rel="stylesheet" href="./css/styles_profile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+<div class="menu-column">
+{{#studentProfile}}
+        <h2>Меню</h2>
+        <ul>
+            <li><a href="/profile">Мой профиль</a></li>
+            <li><a href="/student/statistics">Статистика</a></li>
+            <li>  <a href="/teachers">Учителя</a></li>
+            <li><a href="/">Главная</a> </li>
+            <li><a href="/login">Выйти</a></li>
+        </ul>
+
+{{/studentProfile}}
+{{#teacherProfile}}
+            <h2>Меню</h2>
+            <ul>
+                <li><a href="/profile">Мой профиль</a></li>
+                <li><a href="/teachers">Учителя</a></li>
+                <li><a href="/teacher/lessons">Мои Уроки</a></li>
+                <li><a href="/teacher/statistics">Статистика</a></li>
+                <li><a href="/teacher/lessons/add">Добавление урока</a></li>
+                <li><a href="/verification">Подтверждение</a></li>
+                <li><a href="/">Главная</a> </li>
+                <li><a href="/login">Выйти</a></li>
+            </ul>
+{{/teacherProfile}}
+    {{#admin}}
+        <h2>Меню</h2>
+        <ul>
+            <li><a href="/admin/approve-teachers">Подтверждение учителей</a></li>
+            <li><a href="/admin/sections">Добавление разделов</a></li>
+            <li>  <a href="/admin/blockPage">Блокировка пользователей</a></li>
+            <li><a href="/">Главная</a> </li>
+            <li><a href="/login">Выйти</a></li>
+        </ul>
+
+    {{/admin}}
+</div>
+    <div class="content-column">
+        <div class="left-column">
+            <h1>Мой профиль</h1>
+            {{#user}}
+                {{#base64Image}}
+                    <img src="data:image/png;base64,{{.}}" alt="Profile Image" />
+                {{/base64Image}}
+            {{/user}}
+        </div>
+        <div class="right-column">
+            {{#studentProfile}}
+            {{#user}}
+                <h2>Здравствуйте, {{username}}!</h2>
+                <p>Имя: {{firstName}}</p>
+                <p>Фамилия: {{lastName}}</p>
+                <p>Email: {{email}}</p>
+                <p>Описание: {{bio}}</p>
+                <a href="/profile/edit" id="edit_profile">Редактировать профиль</a>
+            {{/user}}
+            {{/studentProfile}}
+            {{#teacherProfile}}
+            <div class="right-column">
+                <h2>Здравствуйте, {{user.username}}!</h2>
+                <p>Имя: {{user.firstName}}</p>
+                <p>Фамилия: {{user.lastName}}</p>
+                <p>Описание: {{user.bio}}</p>
+                <p>Подтвержденный статус:
+                    {{#teacherProfile.isApproved}}
+                        <span style="color: green;">Подтвержден</span>
+                    {{/teacherProfile.isApproved}}
+                    {{^teacherProfile.isApproved}}
+                        <span style="color: red;">Не подтвержден</span>
+                    {{/teacherProfile.isApproved}}
+                </p>
+                <a href="/profile/edit" id="edit_profile1">Редактировать профиль</a>
+
+            {{/teacherProfile}}
+            {{#admin}}
+               <h2>Добро пожаловатьв панель Администратора!</h2>
+            {{/admin}}
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,229 @@
+/* styles_add_lessons.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-image: url('../src/blur_fon.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #380470;
+    font-size: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #5A0DAC;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+}
+
+.form-group textarea {
+    resize: none;
+    height: 100px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #5A0DAC;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 15px;
+    width: fit-content;
+    align-self: center;
+}
+
+button:hover {
+    background-color: #4c51bf;
+}
+
+#taskContainer,
+#testContainer {
+    margin-bottom: 20px;
+}
+
+.task,
+.test {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.task label,
+.test label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #5A0DAC;
+}
+
+.task input,
+.task textarea,
+.test input,
+.test textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 900px) {
+    .container {
+        max-width: 90%;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 20px;
+    }
+
+    .form-group label {
+        font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}
+.form-wrapper {
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.form-wrapper.hidden {
+    display: none;
+}
+
+button {
+    margin: 5px 0;
+}
+.task, .test {
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    position: relative;
+}
+
+.close-btn {
+    background-color: #ff4c4c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    position: absolute;
+    top: -10px;
+    right: -5px;
+}
+
+.close-btn:hover {
+    background-color: #e04343;
+}
+
+button {
+    margin-top: 10px;
+}
+.form-actions {
+    display: flex;
+    flex-direction: column; /* Расположить кнопки вертикально */
+    gap: 10px; /* Расстояние между кнопками */
+    width: 100%; /* Растянуть контейнер на весь экран */
+    max-width: 100%; /* Ограничение на ширину */
+    padding: 0 10px; /* Отступы по краям */
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.save-btn,
+.cancel-btn {
+    width: 100%; /* Кнопки занимают всю ширину */
+    padding: 15px; /* Увеличен отступ для крупного отображения */
+    font-size: 18px; /* Увеличен размер текста */
+    border-radius: 5px; /* Закруглённые углы */
+    border: none; /* Без рамок */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.save-btn {
+    background-color: #5A0DAC;
+    color: white;
+}
+
+.save-btn:hover {
+    background-color: #4c51bf;
+}
+
+.cancel-btn {
+    background-color: #5A0DAC;    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #4c51bf;
+}

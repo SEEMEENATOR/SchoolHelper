@@ -1,0 +1,171 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    height: 100vh;
+    background-image: url('../src/blur_fon.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.menu-column {
+    width: 250px;
+    color: #5A0DAC;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 5%;
+    margin-left: 3%;
+}
+
+.menu-column h2 {
+    font-size: 18px;
+    color: #5A0DAC;
+    margin-bottom: 15px;
+}
+
+.menu-column ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.menu-column ul li {
+    margin-bottom: 10px;
+}
+
+.menu-column ul li a {
+    text-decoration: none;
+    color: #5A0DAC;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 10px 0;
+    display: block;
+    width: 100%;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.menu-column ul li a:hover {
+    color: black;
+}
+
+.content-column {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    padding: 20px;
+    margin-top: 5%;
+}
+
+.left-column {
+    flex: 1;
+    text-align: center;
+    width:30%;
+}
+
+.right-column {
+    flex: 2;
+    padding-left: 20px;
+    text-align: left;
+    margin-top: 6%;
+}
+
+img {
+    margin-top: 5%;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+.right-column p{
+margin-top: 5%;
+}
+h1, h2 {
+    color: #333;
+}
+
+p {
+    font-size: 16px;
+    color: #666;
+    margin: 10px 0;
+}
+
+a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+a:hover {
+    color: black;
+}
+#edit_profile{
+    padding: 3%;
+    border: none;
+    background-color: #5A0DAC;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 3%;
+    width: auto;
+
+}
+#edit_profile:hover, #save_changes:hover{
+    color: #ddd0eb;
+}
+#edit_profile1{
+    padding: 3%;
+    border: none;
+    background-color: #5A0DAC;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 3%;
+    width: auto;
+
+}
+#edit_profile1:hover, #save_changes:hover{
+    color: #ddd0eb;
+}
+#save_changes{
+    padding: 1%;
+    border: none;
+    background-color: #5A0DAC;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 3%;
+    width: auto;
+}

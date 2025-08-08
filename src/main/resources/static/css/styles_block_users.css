@@ -1,0 +1,171 @@
+/* 🔁 Сброс стилей */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 🌄 Общие настройки */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(to right, #f4f4f9, #eaeaf3), url('../src/blur_fon.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+    line-height: 1.6;
+    padding: 40px 20px;
+    min-height: 100vh;
+}
+
+/* 🏷️ Заголовок */
+h1 {
+    text-align: center;
+    color: #5A0DAC;
+    margin-bottom: 40px;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+/* 🔍 Блок фильтров */
+#filter-form {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 25px;
+    margin: 0 auto 40px;
+    max-width: 900px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* 🔤 Поля ввода */
+#filter-form input[type="text"],
+#filter-form select {
+    flex: 1;
+    min-width: 220px;
+    padding: 12px 16px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: all 0.2s ease;
+}
+
+#filter-form input:focus,
+#filter-form select:focus {
+    border-color: #5A0DAC;
+    outline: none;
+}
+
+/* 🎯 Кнопка фильтра */
+button {
+    padding: 12px 20px;
+    font-size: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+    background: linear-gradient(135deg, #5A0DAC, #7e3ff2);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #4e09b3, #6e34e3);
+    transform: scale(1.02);
+}
+
+/* 🔙 Кнопка "Назад" */
+.back-link {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    text-decoration: none;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #8b00ff, #a341ff);
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.back-link:hover {
+    background: linear-gradient(135deg, #6f00cc, #902ee6);
+}
+
+/* 👥 Список карточек */
+.user-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 🧾 Карточка пользователя */
+.user-card {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-left: 6px solid #5A0DAC;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.user-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+}
+
+.user-card.blocked {
+    background-color: #fff3f3;
+    border-left-color: #ff5c5c;
+    opacity: 0.9;
+}
+
+.user-card p {
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.user-card strong {
+    color: #5A0DAC;
+}
+
+/* 📥 Кнопка внутри карточки */
+.user-card button {
+    margin-top: 10px;
+    background-color: #5A0DAC;
+    width: 100%;
+}
+
+/* 🧱 Разделитель */
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #ddd;
+    margin: 30px 0;
+}
+
+/* 📱 Адаптив */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 26px;
+    }
+
+    #filter-form {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .back-link {
+        font-size: 16px;
+        padding: 10px 14px;
+    }
+}

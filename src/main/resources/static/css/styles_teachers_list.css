@@ -1,0 +1,160 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    padding: 20px;
+    background-image: url('../src/blur_fon.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+\
+/* Заголовок страницы */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #5A0DAC;
+    font-size: 2rem;
+}
+
+/* Карточка учителя */
+.teacher-card {
+    background-color: #fff; /* Белый фон */
+    border-radius: 10px; /* Скругленные углы */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень */
+    padding: 20px; /* Внутренние отступы */
+    margin-bottom: 20px; /* Отступ между карточками */
+    max-width: 900px; /* Ограничение ширины */
+    margin-left: auto; /* Центрирование */
+    margin-right: auto; /* Центрирование */
+    overflow: hidden; /* Убираем лишний контент */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.teacher-card:hover {
+    transform: scale(1.02); /* Небольшое увеличение при наведении */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Увеличение тени */
+}
+
+/* Имя учителя */
+.teacher-card h2 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* Основная информация */
+.teacher-card p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+/* Биография */
+.bio {
+    font-style: italic;
+    color: #444;
+}
+
+/* Список уроков */
+.lesson-list {
+    list-style: none; /* Убираем маркеры */
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+.lesson-list li {
+    margin-bottom: 10px;
+}
+
+/* Ссылки на уроки */
+.lesson-link {
+    color: #5A0DAC;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.lesson-link:hover {
+    color: #4e09b3;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .teacher-card {
+        padding: 15px; /* Уменьшаем отступы */
+    }
+
+    .teacher-card h2 {
+        font-size: 1.2rem; /* Уменьшаем размер шрифта */
+    }
+
+    .teacher-card p {
+        font-size: 0.9rem; /* Уменьшаем размер текста */
+    }
+}
+
+
+
+ body {
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            text-decoration: none;
+            padding: 10px 15px;
+            background-color: #8b00ff;
+            color: white;
+            border-radius: 5px;
+            font-weight: 500;
+            font-size:24px;
+            transition: background-color 0.3s;
+        }
+
+        .back-link:hover {
+            background-color: #0056b3;
+        }
+
+        .teacher-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            width: 100%;
+            max-width: 900px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .lesson-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .lesson-link {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        .lesson-link:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            text-align: center;
+        }

@@ -1,0 +1,50 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.11'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-mustache'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.postgresql:postgresql:42.7.2'
+	compileOnly 'org.projectlombok:lombok:1.18.34'
+	annotationProcessor 'org.projectlombok:lombok:1.18.34'
+	testCompileOnly 'org.projectlombok:lombok:1.18.34'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.glassfish:javax.el:3.0.0'
+	implementation 'net.sourceforge.tess4j:tess4j:5.4.0'
+	implementation 'jakarta.validation:jakarta.validation-api:3.0.0'
+	implementation 'org.hibernate.validator:hibernate-validator:6.2.0.Final'
+	implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+
+
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

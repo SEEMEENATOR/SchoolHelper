@@ -1,0 +1,63 @@
+ .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .username {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-image {
+            position: relative;
+            display: inline-block;
+            width: 150px;
+            height: 170px;
+            overflow: hidden;
+            border-radius: 50%;
+        }
+
+        .profile-image img {
+            object-fit: cover;
+            cursor: pointer;
+            margin: 0;
+            padding: 0;
+        }
+
+        .edit-overlay {
+            position: absolute;
+            height: 170px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+
+        .profile-image:hover .edit-overlay {
+            opacity: 1;
+        }
+
+        #save_changes {
+            margin-top: 10px;
+            display: block;
+            width: 100%;
+        }

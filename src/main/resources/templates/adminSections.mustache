@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Разделы</title>
+    <link rel="stylesheet" href="/css/styles_adminSection.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        function toggleEdit(sectionId) {
+            const titleText = document.getElementById(`sectionTitle-${sectionId}`);
+            const titleInput = document.getElementById(`sectionTitleInput-${sectionId}`);
+            const descriptionText = document.getElementById(`sectionDescription-${sectionId}`);
+            const descriptionInput = document.getElementById(`sectionDescriptionInput-${sectionId}`);
+            const saveButton = document.getElementById(`saveButton-${sectionId}`);
+            const editButton = document.getElementById(`editButton-${sectionId}`);
+
+            titleText.classList.toggle('hidden');
+            titleInput.classList.toggle('hidden');
+            descriptionText.classList.toggle('hidden');
+            descriptionInput.classList.toggle('hidden');
+            saveButton.classList.toggle('hidden');
+            editButton.classList.toggle('hidden');
+        }
+
+        function updateHiddenFields(sectionId) {
+            const titleInput = document.getElementById(`sectionTitleInput-${sectionId}`);
+            const descriptionInput = document.getElementById(`sectionDescriptionInput-${sectionId}`);
+            const hiddenTitle = document.getElementById(`hiddenTitle-${sectionId}`);
+            const hiddenDescription = document.getElementById(`hiddenDescription-${sectionId}`);
+
+            hiddenTitle.value = titleInput.value;
+            hiddenDescription.value = descriptionInput.value;
+        }
+    </script>
+
+</head>
+<body>
+<a href="/profile" class="back-link">Назад</a>
+<div class="container">
+    <h1>Разделы</h1>
+
+    <a href="/admin/sections?action=add" class="btn">Добавить раздел</a>
+
+    {{#addForm}}
+        <h2>Добавить новый раздел</h2>
+        <form action="/admin/sections/add" method="post" class="form-container">
+            <div class="form-group">
+                <label for="title">Название раздела</label>
+                <input type="text" id="title" name="title" required>
+                <label for="description">Описание раздела</label>
+                <input type="text" id="description" name="description" required>
+            </div>
+            <div class="btn-group">
+                <button type="submit" class="btn">Сохранить</button>
+                <a href="/admin/sections" class="btn btn-secondary">Отмена</a>
+            </div>
+        </form>
+    {{/addForm}}
+
+    <h2>Существующие разделы</h2>
+    {{#sections}}
+        <div class="section-card">
+            <!-- Заголовок -->
+            <h3 id="sectionTitle-{{id}}" class="section-title">{{title}}</h3>
+            <input type="text" id="sectionTitleInput-{{id}}" class="section-title-input hidden" value="{{title}}" />
+
+            <!-- Описание -->
+            <p id="sectionDescription-{{id}}" class="section-description">{{description}}</p>
+            <textarea id="sectionDescriptionInput-{{id}}" class="section-description-input hidden">{{description}}</textarea>
+
+            <div class="btn-group">
+                <!-- Кнопка редактирования -->
+                <button id="editButton-{{id}}" type="button" class="btn btn-edit" onclick="toggleEdit({{id}})">Редактировать</button>
+
+                <!-- Кнопка сохранения -->
+                <form action="/admin/edit-section/{{id}}" method="post" style="display:inline;" class="hidden" id="saveButton-{{id}}" onsubmit="updateHiddenFields({{id}})">
+                    <input type="hidden" name="title" value="{{title}}" id="hiddenTitle-{{id}}">
+                    <input type="hidden" name="description" value="{{description}}" id="hiddenDescription-{{id}}">
+                    <button type="submit" class="btn btn-save">Сохранить</button>
+                </form>
+
+
+                <!-- Кнопка удаления -->
+                <form action="/admin/delete-section/{{id}}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-delete">Удалить</button>
+                </form>
+            </div>
+            <p>Создан администратором: {{admin.username}}</p>
+        </div>
+        <hr>
+    {{/sections}}
+
+    {{^sections}}
+        <p>Разделы отсутствуют.</p>
+    {{/sections}}
+
+</div>
+</body>
+</html>

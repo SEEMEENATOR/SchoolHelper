@@ -1,0 +1,295 @@
+/* Общие стили для всех элементов */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Фон и выравнивание */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    background-image: url('../src/blur_fon.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Контейнер */
+.container {
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Полупрозрачный фон */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем содержимое по горизонтали */
+    justify-content: flex-start; /* Центрируем содержимое по вертикали */
+}
+
+/* Заголовки */
+h1 {
+    color: #380470;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+h2 {
+    color: #380470;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Карточки разделов */
+.section-card {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Обеспечиваем, чтобы карточки занимали всю ширину контейнера */
+    max-width: 700px; /* Ограничиваем максимальную ширину */
+}
+
+.section-card h3 {
+    font-size: 20px;
+    color: #380470;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.section-card p {
+    font-size: 14px;
+    color: #380470;
+    text-align: center;
+}
+
+.section-card .btn-group {
+    display: flex;
+    justify-content: center; /* Выравнивание кнопок по центру */
+    margin-top: 10px;
+    width: 100%; /* Кнопки будут располагаться на всей ширине */
+}
+
+.section-card .btn-group button,
+.section-card .btn-group form {
+    width: 100%; /* Кнопки будут располагаться рядом */
+    margin: 0 1%; /* Отступ между кнопками */
+}
+
+/* Скрытие полей ввода */
+.hidden {
+    display: none;
+}
+
+/* Кнопки */
+.btn {
+    display: inline-block;
+    padding: 12px 20px; /* Сделано поле кнопки больше */
+    font-size: 16px;
+    color: #fff;
+    background-color: #5A0DAC;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    width: 100%; /* Кнопки будут располагаться рядом */
+    margin: 0 1%; /* Отступ между кнопками */
+}
+
+.btn:hover {
+    background-color: #4c51bf;
+}
+
+.btn-edit, .btn-delete, .btn-secondary {
+    background-color: #5A0DAC;
+}
+
+.btn-edit:hover, .btn-delete:hover, .btn-secondary:hover {
+    background-color: #4c51bf;
+}
+
+.btn-edit {
+    background-color: #5A0DAC;
+}
+
+.btn-delete {
+    background-color: #5A0DAC;
+}
+
+.btn-secondary {
+    background-color: #5A0DAC;
+}
+
+/* Разделитель */
+hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+    width: 100%; /* Чтобы разделитель растягивался на всю ширину */
+}
+
+/* Пустое состояние */
+.container p {
+    text-align: center;
+    color: #7f89a1;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+/* Стили для формы добавления раздела */
+.form-container {
+    margin-top: 20px;
+    width: 100%; /* Форма будет занимать всю ширину */
+    max-width: 700px; /* Ограничиваем максимальную ширину */
+}
+
+.form-group {
+    margin-bottom: 20px; /* Сделан одинаковый отступ между всеми полями */
+}
+
+.form-group label {
+    display: block;
+    font-size: 16px;
+    color: #380470;
+    margin-bottom: 8px; /* Равномерный отступ снизу */
+    text-align: center;
+}
+
+.form-group input {
+    width: 100%; /* Сделано полное заполнение по ширине */
+    padding: 18px; /* Увеличен отступ внутри поля ввода, чтобы оно было выше */
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* Чтобы padding не выходил за пределы */
+    margin-bottom: 20px; /* Отступ снизу поля */
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #5A0DAC;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center; /* Центрируем кнопки */
+    margin-top: 20px;
+}
+
+.btn-secondary {
+    background-color: #5A0DAC;
+}
+
+.btn-secondary:hover {
+    background-color: #4c51bf;
+}
+
+.section-card input {
+    width: 100%; /* Сделано полное заполнение по ширине */
+    padding: 18px; /* Увеличен отступ внутри поля ввода, чтобы оно было выше */
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* Чтобы padding не выходил за пределы */
+    margin-bottom: 20px; /* Отступ снизу поля */
+}
+
+/* Адаптивность для мобильных устройств */
+
+/* Для экранов шириной до 768px */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px; /* Уменьшаем отступы на маленьких экранах */
+    }
+
+    .section-card {
+        padding: 15px; /* Меньшие отступы в карточке */
+        width: 100%; /* Карточки на весь экран */
+    }
+
+    .form-container {
+        width: 100%;
+        padding: 0 15px; /* Уменьшаем отступы для формы */
+    }
+
+    .btn {
+        padding: 10px 15px; /* Уменьшаем размер кнопок */
+        font-size: 14px; /* Меньший размер шрифта */
+    }
+
+    .section-card .btn-group {
+        flex-direction: column; /* Кнопки расположим вертикально на маленьких экранах */
+        width: 100%;
+    }
+
+    .section-card .btn-group button {
+        width: 100%; /* Кнопки на весь экран */
+        margin: 5px 0; /* Отступы между кнопками */
+    }
+
+    .section-card input {
+        padding: 12px; /* Меньше отступов в поле ввода */
+        font-size: 14px; /* Меньший размер шрифта для мобильных устройств */
+    }
+
+    h1 {
+        font-size: 20px; /* Уменьшаем размер заголовка */
+    }
+
+    h2 {
+        font-size: 18px; /* Уменьшаем размер заголовка */
+    }
+
+    .form-group input {
+        padding: 15px; /* Меньше отступов в поле ввода */
+        font-size: 14px; /* Меньший шрифт */
+    }
+}
+
+/* Для экранов шириной до 480px */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 18px; /* Еще меньше размер шрифта */
+    }
+
+    .form-group input {
+        padding: 12px; /* Поле ввода с меньшими отступами */
+    }
+
+    .btn {
+        padding: 8px 12px; /* Меньшие кнопки */
+        font-size: 14px; /* Меньший шрифт */
+    }
+}
+  .back-link {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            text-decoration: none;
+            padding: 10px 15px;
+            background-color: #8b00ff;
+            color: white;
+            border-radius: 5px;
+            font-weight: 500;
+            font-size:24px;
+            transition: background-color 0.3s;
+        }
+
+        .back-link:hover {
+            background-color: #0056b3;
+        }

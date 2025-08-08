@@ -1,0 +1,35 @@
+{{#teachers}}
+    <div class="teacher-card">
+        <p><strong>Username:</strong> {{profile.user.username}}</p>
+        <p><strong>Имя:</strong> {{profile.user.firstName}} {{profile.user.lastName}}</p>
+        <p><strong>Email:</strong> {{profile.user.email}}</p>
+        <p><strong>Статус:</strong>
+            {{#profile.isApproved}} <span class="approved">Подтверждён</span> {{/profile.isApproved}}
+            {{^profile.isApproved}} <span class="not-approved">Не подтверждён</span> {{/profile.isApproved}}
+        </p>
+        <p><strong>Проверка системы:</strong>
+            {{#profile.isVerifiedBySystem}} <span class="verified">Предварительно проверен</span> {{/profile.isVerifiedBySystem}}
+            {{^profile.isVerifiedBySystem}} <span class="not-verified">Не проверен системой</span> {{/profile.isVerifiedBySystem}}
+        </p>
+
+        {{#hasCertificate}}
+            <button class="btn btn-view" onclick="toggleCertificate(this)">Показать сертификат</button>
+            <div class="certificate-container">
+                <img src="data:image/jpeg;base64,{{certificateImageBase64}}" class="certificate-image" alt="Сертификат">
+            </div>
+        {{/hasCertificate}}
+
+        {{^hasCertificate}}
+            <p>Сертификат не загружен</p>
+        {{/hasCertificate}}
+
+        <form action="/admin/approve-teacher/{{profile.id}}" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-approve">Подтвердить</button>
+        </form>
+
+        <form action="/admin/reject-teacher/{{profile.id}}" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-reject">Отклонить</button>
+        </form>
+    </div>
+    <hr>
+{{/teachers}}

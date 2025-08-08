@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Block Users</title>
+    <link rel="stylesheet" href="/css/styles_block_users.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<a href="/profile" class="back-link">Назад</a>
+
+<div class="container">
+    <h1>Пользователи</h1>
+
+    <form id="filter-form" style="margin-bottom: 30px; display: flex; gap: 15px; flex-wrap: wrap;">
+        <input
+                type="text"
+                name="search"
+                id="search-input"
+                placeholder="Поиск по username..."
+                value="{{search}}"
+                style="padding: 10px 15px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px;"
+        >
+
+        <select id="role-select" style="padding: 10px 15px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px;">
+            <option value="">Все</option>
+            <option value="STUDENT" {{#roleIsStudent}}selected{{/roleIsStudent}}>Ученики</option>
+            <option value="TEACHER" {{#roleIsTeacher}}selected{{/roleIsTeacher}}>Учителя</option>
+        </select>
+    </form>
+
+    <div id="user-list">
+        {{> _userList}}
+    </div>
+</div>
+
+<script>
+    let debounceTimeout;
+
+  document.getElementById('search-input').addEventListener('input', submitForm);
+  document.getElementById('role-select').addEventListener('change', submitForm);
+
+  function submitForm() {
+      clearTimeout(debounceTimeout);
+      debounceTimeout = setTimeout(() => {
+          const search = document.getElementById('search-input').value;
+          const role = document.getElementById('role-select').value;
+
+          fetch(`/admin/blockPage?search=${encodeURIComponent(search)}&role=${role}`)
+              .then(res => res.text())
+              .then(html => {
+                  const parser = new DOMParser();
+                  const doc = parser.parseFromString(html, 'text/html');
+                  const newContent = doc.querySelector('#user-list').innerHTML;
+                  document.getElementById('user-list').innerHTML = newContent;
+              });
+      }, 300);
+  }
+
+</script>
+</body>
+</html>

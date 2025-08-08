@@ -1,0 +1,233 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('../src/blur_fon.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+
+}
+
+.container {
+    display: flex;
+    max-width: 70%;
+    width: 100%;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.image-section {
+    width: 50%;
+    border-radius:white ;
+}
+
+.image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.registration-form {
+    width: 60%;
+    padding: 20px;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.registration-form h2 {
+    margin-bottom: 7%;
+    color: #380470;
+    padding-left: 1%;
+
+}
+
+.registration-form input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none; 
+    border-bottom: 1px solid #ccc; 
+    border-radius: 0; 
+    font-size: 16px;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.registration-form input::placeholder {
+    color: #7f89a1;
+   
+}
+
+.registration-form button {
+    padding: 4%;
+    border: none;
+    background-color: #5A0DAC;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 1%;
+    margin-top: 7%;
+    width: 70%;
+
+}
+
+.registration-form button:hover {
+    background-color: #4c51bf;
+}
+
+.registration-form select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+    width: 70%;
+    border-radius: 0;
+    outline: none;
+    background-color: #fff;
+    color: #7f89a1;
+}
+
+body, .container, .registration-form, .registration-form input, .registration-form select, .registration-form button, .registration-form h2 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+form p {
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 15px;
+    font-size: 14px;
+    padding-left: 1%;
+    color: #7D9F00;
+}
+
+form p a {
+    font-family: 'Montserrat', sans-serif;
+    color: #5A0DAC; /* Замените на нужный цвет */
+    text-decoration: none;
+}
+
+form p a:hover {
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: underline;
+}
+.role-selection {
+    margin: 20px 0;
+}
+
+.role-title {
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #380470;
+}
+
+.role-options {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.role-card {
+    flex: 1 1 45%;
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.role-card:hover {
+    border-color: #5A0DAC;
+    background-color: #f0e8ff;
+}
+
+.role-card.selected {
+    border-color: #5A0DAC;
+    background-color: #e8d9ff;
+}
+
+.role-card h3 {
+    margin-bottom: 10px;
+    color: #5A0DAC;
+    font-size: 1.2rem;
+}
+
+.role-card p {
+    font-size: 14px;
+    color: #555;
+}
+
+
+
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column; 
+        max-width: 90%; 
+    }
+
+    .image-section, .registration-form {
+        width: 100%; 
+    }
+
+    .registration-form {
+        margin-left: 0;
+        padding: 15px; 
+    }
+
+    .registration-form input,
+    .registration-form button,
+    .registration-form select {
+        width: 90%; */
+    }
+
+    .registration-form h2 {
+        font-size: 1.5rem; 
+    }
+}
+
+
+@media (max-width: 480px) {
+    .container {
+        max-width: 100%; 
+        padding: 0 10px;
+    }
+
+    .registration-form h2 {
+        font-size: 1.2rem; 
+    }
+
+    .registration-form input,
+    .registration-form button,
+    .registration-form select {
+        width: 100%; 
+        font-size: 14px; 
+    }
+
+    .registration-form button {
+        padding: 12px; 
+        font-size: 14px;
+    }
+
+    form p {
+        font-size: 13px; 
+    }
+

@@ -1,0 +1,19 @@
+<div class="user-list">
+    {{#users}}
+        <div class="user-card {{#isBlocked}}blocked{{/isBlocked}}">
+            <p><strong>Имя пользователя:</strong> {{username}}</p>
+            <p><strong>Роль:</strong> {{role}}</p>
+            <p><strong>Статус:</strong>
+                {{#isBlocked}}<span style="color: #ff5c5c;">Заблокирован</span>{{/isBlocked}}
+                {{^isBlocked}}<span style="color: #28a745;">Активен</span>{{/isBlocked}}
+            </p>
+
+            <form action="/admin/{{#isBlocked}}unblockUser{{/isBlocked}}{{^isBlocked}}blockUser{{/isBlocked}}" method="post">
+                <input type="hidden" name="username" value="{{username}}">
+                <button type="submit">
+                    {{#isBlocked}}Разблокировать{{/isBlocked}}{{^isBlocked}}Заблокировать{{/isBlocked}}
+                </button>
+            </form>
+        </div>
+    {{/users}}
+</div>

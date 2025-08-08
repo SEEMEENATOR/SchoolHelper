@@ -1,0 +1,79 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('../src/background_main_1.png'), url('../src/background_main_2.png');
+    background-repeat: repeat;
+    background-position: 0 0, 100px 100px;
+}
+header {
+    background: rgba(255, 255, 255, 0.1); 
+    color: white;
+    padding: 10px 0;
+    backdrop-filter: blur(10px);
+}
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+   
+}
+
+.logo img {
+   height: 70px;
+}
+
+.menu {
+    flex: 1; /* Заполняем оставшееся пространство */
+    display: flex;
+    justify-content: center; 
+    font-weight: 500;
+}
+
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.menu li {
+    margin: 0 15px; 
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px; 
+    transition: background-color 0.3s; 
+}
+
+.menu a:hover {
+    background-color: #C0F400; 
+    border-radius: 30px; 
+    color: black;
+}
+
+.login-button a {
+    color: white;
+    text-decoration: none;
+    background: linear-gradient(to right, #19003A, #C0F400); 
+    padding: 6% 50px; 
+    border-radius: 30px; 
+    transition: background-color 0.3s; 
+    display: inline-block;
+}
+
+
+.login-button a:hover {
+    background: linear-gradient(to right, #C0F400, #380470); /* Inverts the gradient on hover */
+}
+
+
+.login-button a:hover {
+    background-color: #0056b3; /* Цвет фона кнопки при наведении */
+}

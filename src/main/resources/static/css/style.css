@@ -1,0 +1,315 @@
+/* Сброс стилей */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Основной стиль для body */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-image: url('../src/blur_fon.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Верхнее меню */
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: #5A0DAC;
+    padding: 10px 0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Центрирование меню */
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Кнопки меню */
+.btn, .dropdown-button, .dropdown-button-inner {
+    padding: 10px 20px;
+    background-color: transparent;
+    color: #5A0DAC;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+    cursor: pointer;
+}
+
+/* Эффект при наведении */
+.btn:hover, .dropdown-button:hover, .dropdown-button-inner:hover {
+    background-color: #5A0DAC;
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* Выпадающее меню */
+.dropdown-menu,
+.dropdown-menu-inner {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 10px 0;
+    z-index: 1000;
+    left: 0;
+    top: 100%;
+}
+
+/* Показ меню при клике */
+.dropdown-menu.show,
+.dropdown-menu-inner.show {
+    display: block;
+}
+
+/* Стили для выпадающих элементов */
+.dropdown-item {
+    position: relative;
+    padding: 5px 20px;
+    transition: background-color 0.3s;
+}
+
+.dropdown-menu a,
+.dropdown-menu-inner a {
+    text-decoration: none;
+    color: #5A0DAC;
+    font-size: 14px;
+    padding: 5px 20px;
+    display: block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu-inner a:hover {
+    color: black;
+    background-color: #ddd0eb;
+}
+
+/* Для вложенного меню (уроки) */
+.dropdown-menu-inner {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    border-radius: 5px;
+    display: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Показ вложенного меню */
+.dropdown-item:hover .dropdown-menu-inner {
+    display: block;
+}
+/* Основной контент */
+.container {
+    margin-top: 4%;
+    flex: 1;
+    padding: 20px;
+    color: #333;
+    text-align: center;
+}
+
+/* Контейнер для контента */
+.content-container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    background-color: transparent; /* Прозрачный фон для всего контейнера */
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 3% auto; /* Центрируем контейнер */
+}
+
+/* Колонка с изображением */
+.image-column {
+    flex: 1;
+    margin-right: 2%;
+    text-align: center;
+    border-radius: 8px 0 0 8px; /* Закругляем только левую сторону */
+    overflow: hidden;
+    height: 600px; /* Задаем высоту 100% для выравнивания */
+}
+
+/* Изображение */
+.content-image {
+    width: 100%; /* Делаем изображение на всю ширину колонки */
+    height: 600px; /* Высота изображения будет занимать всю высоту колонки */
+    object-fit: cover; /* Обеспечиваем сохранение пропорций при обрезке изображения */
+    border-radius: 8px; /* Закругляем изображение */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Эффект увеличения изображения при наведении */
+.content-image:hover {
+    transform: scale(1.1);
+}
+
+/* Колонка с текстом */
+.text-column {
+    flex: 1; /* Занимает ту же ширину, что и колонка с изображением */
+    background-color: #fff; /* Белый фон только для текстовой колонки */
+    text-align: left;
+    border-radius: 8px; /* Закругляем только правую сторону */
+    padding: 20px; /* Отступы внутри блока */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Легкая тень для отделения */
+    height: 100%; /* Обеспечиваем одинаковую высоту для текстового блока */
+}
+
+/* Заголовки в правой колонке */
+.text-column h2 {
+    font-size: 18px;
+    color: #5A0DAC;
+    margin-bottom: 10px;
+}
+
+/* Описание платформы */
+.platform-info p {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Стили для ссылок в правой колонке */
+.text-column a {
+    color: #5A0DAC;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* При наведении на ссылку */
+.text-column a:hover {
+    text-decoration: underline;
+    color: #6f2db5;
+}
+
+/* Стили для контейнера с текстом */
+.text-column {
+    padding: 15px;
+    background-color: white; /* Белый фон для правого блока */
+    border-radius: 10px; /* Скругление углов */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Легкая тень для отделения */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Выравнивание текста по левому краю */
+    height: 100%;
+}
+
+/* Стили для заголовка h2 */
+.platform-info h2 {
+    font-size: 28px;
+    color: #5A0DAC; /* Фиолетовый цвет для заголовка */
+    margin-bottom: 20px;
+    font-weight: 600; /* Жирный заголовок */
+}
+
+/* Стили для параграфа */
+.platform-info p {
+    font-size: 16px;
+    color: #555; /* Темно-серый текст для улучшения читаемости */
+    line-height: 1.6; /* Интерлиньяж для удобства восприятия текста */
+    margin-bottom: 20px; /* Отступ снизу */
+    max-width: 750px; /* Максимальная ширина текста для удобства чтения */
+}
+
+/* Стили для списка */
+.platform-info ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 20px;
+}
+
+.platform-info ul li {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+    padding-left: 20px; /* Отступ слева для элементов списка */
+    position: relative;
+}
+
+.platform-info ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #5A0DAC; /* Фиолетовые маркеры */
+}
+.toast-container {
+    position: fixed;
+    margin-top: 60px; /* Здесь добавляем отступ, равный высоте главного меню */
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+
+.toast {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 15px 25px;
+    margin: 15px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    font-weight: 500;
+    font-size: 16px;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    animation: slideDown 0.4s ease, fadeOut 0.5s ease 9.5s forwards;
+    pointer-events: auto;
+}
+
+.toast button {
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #856404;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}

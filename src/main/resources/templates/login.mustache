@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style_registration.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="image-section">
+        <img src="/src/login.png" alt="Изображение входа">
+    </div>
+    <div class="registration-form">
+        <h2>Авторизация</h2>
+        <form action="/login" method="POST">
+            <input type="text" id="username" name="username" placeholder="Имя пользователя" required>
+            <input type="password" id="password" name="password" placeholder="Пароль" required>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <button type="submit">Войти</button>
+            <p>Если у вас нет аккаунта, <a href="/registration">зарегистрируйтесь</a>.</p>
+        </form>
+
+
+        {{#error}}
+            <div style="color: red;">
+                <p>Неверное имя пользователя или пароль.</p>
+            </div>
+        {{/error}}
+
+
+        {{#blocked}}
+            <div style="color: red;">
+                <p>Ваш аккаунт заблокирован.</p>
+            </div>
+        {{/blocked}}
+
+    </div>
+</div>
+
+</body>
+</html>

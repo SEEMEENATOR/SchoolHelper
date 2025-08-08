@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{lesson.title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6C4DF6;
+            --primary-dark: #4D2FDB;
+            --secondary: #FF7D59;
+            --dark: #1A1A2E;
+            --light: #F9F9FF;
+            --success: #4CAF50;
+            --error: #F44336;
+            --warning: #FFC107;
+            --info: #2196F3;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.2);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            background-image: url('../src/blur_fon.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header and Navigation */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+comment-feedback {
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.comment-feedback.success {
+    background-color: var(--success-light);
+    color: var(--success-dark);
+    border: 1px solid var(--success);
+}
+
+.comment-feedback.error {
+    background-color: var(--error-light);
+    color: var(--error-dark);
+    border: 1px solid var(--error);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 20px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .back-btn i {
+            margin-right: 8px;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Lesson Content */
+        .lesson-container {
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .lesson-container:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .lesson-title {
+            font-family: 'Roboto Slab', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .lesson-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+        }
+.feedback-message {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    display: none;
+    transition: all 0.3s ease;
+}
+
+.feedback-message.processing {
+    background-color: rgba(0, 123, 255, 0.2);
+    color: #007bff;
+    display: block;
+}
+
+.feedback-message.success {
+    background-color: rgba(40, 167, 69, 0.2);
+    color: #28a745;
+    display: block;
+}
+
+.feedback-message.error {
+    background-color: rgba(220, 53, 69, 0.2);
+    color: #dc3545;
+    display: block;
+}
+
+.feedback-btn {
+    transition: all 0.3s ease;
+}
+
+.feedback-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+        .section-title i {
+            margin-right: 15px;
+            color: var(--primary);
+        }
+
+        /* Theory Section */
+        .theory-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .theory-content h3 {
+            margin: 25px 0 15px;
+            color: var(--primary-dark);
+        }
+
+        .theory-content ul, .theory-content ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        .theory-content blockquote {
+            border-left: 4px solid var(--primary);
+            padding: 15px 20px;
+            margin: 20px 0;
+            background: rgba(108, 77, 246, 0.05);
+            font-style: italic;
+        }
+/* Стили для изображений в контенте урока */
+.theory-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+/* Стили для выравнивания из Quill */
+.ql-align-center {
+    text-align: center;
+}
+
+.ql-align-right {
+    text-align: right;
+}
+
+.ql-align-left {
+    text-align: left;
+}
+
+/* Стили для изображений с выравниванием */
+.ql-align-center img,
+.theory-content img.ql-align-center {
+    display: block;
+    margin: 1rem auto;
+}
+
+.ql-align-right img,
+.theory-content img.ql-align-right {
+    display: block;
+    margin: 1rem 0 1rem auto;
+}
+
+.ql-align-left img,
+.theory-content img.ql-align-left {
+    display: block;
+    margin: 1rem auto 1rem 0;
+}
+
+/* Стиль для обертки изображений в Quill */
+.ql-editor .image-container {
+    text-align: center;
+}
+
+.ql-editor .image-container img {
+    display: inline-block;
+    max-width: 100%;
+}
+        /* Tasks Section */
+        .task {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .task:hover {
+            transform: translateX(5px);
+        }
+
+        .task-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .task-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .task-input {
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+
+        .task-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 77, 246, 0.2);
+        }
+
+        .task-btn {
+            align-self: flex-start;
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .task-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .completed-task {
+            background: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid var(--success);
+        }
+
+        /* Tests Section */
+        .test {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .test:hover {
+            transform: translateX(5px);
+        }
+
+        .test-question {
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+
+        .test-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 10px;
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+
+        .test-option:hover {
+            background: rgba(108, 77, 246, 0.05);
+        }
+
+        .test-option input {
+            margin-right: 15px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .test-option label {
+            cursor: pointer;
+            flex-grow: 1;
+        }
+
+        .test-submit-btn {
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 15px;
+        }
+
+        .test-submit-btn:hover {
+            background: #FF6A40;
+            transform: translateY(-2px);
+        }
+
+        .completed-test {
+            background: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid var(--success);
+        }
+
+        /* Feedback Section */
+        .feedback-section {
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .feedback-title {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .feedback-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+
+        .feedback-stat {
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        .feedback-stat i {
+            margin-right: 8px;
+            font-size: 1.3rem;
+        }
+
+        .likes i {
+            color: var(--success);
+        }
+
+        .dislikes i {
+            color: var(--error);
+        }
+
+        .feedback-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .feedback-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .like-btn {
+            background: var(--success);
+            color: white;
+        }
+
+        .dislike-btn {
+            background: var(--error);
+            color: white;
+        }
+
+        .feedback-btn i {
+            margin-right: 8px;
+        }
+
+        .feedback-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Comments Section */
+        .comments-section {
+            padding: 30px;
+        }
+
+        .comments-title {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+
+        .comments-title i {
+            margin-right: 15px;
+            color: var(--primary);
+        }
+
+        .comment-form {
+            margin-bottom: 30px;
+        }
+
+        .comment-textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            min-height: 100px;
+            resize: vertical;
+            transition: var(--transition);
+        }
+
+        .comment-textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 77, 246, 0.2);
+        }
+
+        .comment-submit-btn {
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .comment-submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .comment {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .comment:hover {
+            transform: translateX(5px);
+        }
+
+        .comment-author {
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .comment-author i {
+            margin-right: 8px;
+            color: var(--primary);
+        }
+
+        .comment-role {
+            font-size: 0.8rem;
+            color: #777;
+            margin-left: 10px;
+            background: #eee;
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+
+        .comment-content {
+            margin: 15px 0;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .comment-date {
+            font-size: 0.8rem;
+            color: #999;
+            display: flex;
+            align-items: center;
+        }
+
+        .comment-date i {
+            margin-right: 5px;
+        }
+
+        .reply-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 5px 10px;
+            background: rgba(108, 77, 246, 0.1);
+            color: var(--primary);
+            border: none;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .reply-btn i {
+            margin-right: 5px;
+        }
+
+        .reply-btn:hover {
+            background: rgba(108, 77, 246, 0.2);
+        }
+
+        .reply-form {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .nested-replies {
+            margin-left: 30px;
+            padding-left: 20px;
+            border-left: 2px solid rgba(108, 77, 246, 0.3);
+        }
+
+        /* Feedback Messages */
+        .feedback-message {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .feedback-message i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .success {
+            background-color: rgba(76, 175, 80, 0.15);
+            color: #2E7D32;
+        }
+
+        .error {
+            background-color: rgba(244, 67, 54, 0.15);
+            color: #C62828;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+
+        /* Highlight Effect */
+        @keyframes highlight {
+            0% { background-color: rgba(255, 235, 59, 0.5); }
+            100% { background-color: transparent; }
+        }
+
+        .highlight {
+            animation: highlight 2s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .lesson-container, .section {
+                padding: 20px;
+            }
+
+            .lesson-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .nested-replies {
+                margin-left: 15px;
+                padding-left: 10px;
+            }
+
+            .feedback-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+.feedback-message {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.feedback-message.success {
+    background-color: rgba(40, 167, 69, 0.2);
+    color: #28a745;
+}
+
+.feedback-message.error {
+    background-color: rgba(220, 53, 69, 0.2);
+    color: #dc3545;
+}
+
+.task, .test {
+    transition: all 0.3s ease;
+}
+        @media (max-width: 480px) {
+            .lesson-container, .section {
+                padding: 15px;
+            }
+
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+
+            .back-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+
+            .task-btn, .test-submit-btn, .comment-submit-btn, .feedback-btn {
+                padding: 10px 20px;
+            }
+        }
+        .delete-btn {
+    position: absolute;
+    top: 20px;
+    right: 115px;
+    padding: 5px 10px;
+    background: rgba(244, 67, 54, 0.1);
+    color: var(--error);
+    border: none;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+}
+
+.delete-btn i {
+    margin-right: 5px;
+}
+
+.delete-btn:hover {
+    background: rgba(244, 67, 54, 0.2);
+}
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Анимация блоков
+            document.querySelectorAll('.lesson-container, .section, .comment').forEach((el, index) => {
+                el.classList.add('animate', `delay-${index % 5 + 1}`);
+            });
+
+            // Подсветка элемента по якорю
+            const hash = window.location.hash;
+            if (hash) {
+                const element = document.querySelector(hash);
+                if (element) {
+                    element.classList.add('highlight');
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+
+            // Делегирование для кнопок "Ответить"
+            document.addEventListener('click', function (e) {
+                const replyBtn = e.target.closest('.reply-btn');
+                if (replyBtn) {
+                    const commentId = replyBtn.getAttribute('data-comment-id');
+                    toggleReplyForm(commentId);
+                    e.preventDefault();
+                }
+            });
+
+            // Навешиваем обработчики на уже существующие формы
+            document.querySelectorAll('.comment-form, .reply-form').forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    submitCommentForm(this);
+                });
+            });
+
+            // Обработка форм задач/тестов (осталось без изменений)
+            document.querySelectorAll('.ajax-form').forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    const formData = new FormData(form);
+                    const url = form.getAttribute('action');
+                    const method = form.getAttribute('method');
+                    const isTest = form.hasAttribute('data-test-id');
+                    const id = isTest ? form.getAttribute('data-test-id') : form.getAttribute('data-task-id');
+
+                    fetch(url, {
+                        method,
+                        body: formData,
+                        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            const feedback = document.getElementById(isTest ? `feedback-test-${id}` : `feedback-task-${id}`);
+                            if (feedback) {
+                                const icon = feedback.querySelector('i');
+                                const msg = feedback.querySelector('.message-text');
+                                feedback.style.display = 'block';
+                                feedback.className = `feedback-message ${data.messageType}`;
+                                icon.className = `fas fa-${data.messageType === 'success' ? 'check-circle' : 'exclamation-circle'}`;
+                                msg.textContent = data.message;
+
+                                if (data.messageType === 'success') {
+                                    setTimeout(() => {
+                                        form.closest(isTest ? '.test' : '.task').innerHTML = `
+                                            <p class="${isTest ? 'test-question' : 'task-title'}">
+                                                <i class="fas fa-check-circle" style="color: var(--success);"></i>
+                                                ${isTest ? `Тест "${data.question}" выполнен` : `Задача "${data.content}" выполнена`}
+                                            </p>
+                                        `;
+                                    }, 1500);
+                                }
+                            }
+                        }
+                    })
+                    .catch(err => console.error('Error:', err));
+                });
+            });
+        });
+
+        function toggleReplyForm(commentId) {
+            const form = document.getElementById("reply-form-" + commentId);
+            if (form) {
+                form.classList.toggle("hidden");
+            }
+        }
+
+        function submitCommentForm(form) {
+            const formData = new FormData(form);
+            const url = form.action;
+            const method = form.method;
+            const isReply = form.classList.contains('reply-form');
+
+            fetch(url, {
+                method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(res => {
+                if (!res.ok) throw new Error('Ошибка сети');
+                return res.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    form.querySelector('textarea').value = '';
+                    if (isReply) form.classList.add('hidden');
+
+                    const newComment = createCommentElement(data.comment);
+                    if (isReply) {
+                        let replies = form.closest('.comment').querySelector('.nested-replies');
+                        if (!replies) {
+                            replies = document.createElement('div');
+                            replies.className = 'nested-replies';
+                            form.closest('.comment').appendChild(replies);
+                        }
+                        replies.appendChild(newComment);
+                    } else {
+                        document.querySelector('.comments-list').prepend(newComment);
+                    }
+
+                } else {
+                    showCommentFeedback(data.message || 'Ошибка при добавлении комментария', 'error');
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                showCommentFeedback('Ошибка при отправке комментария', 'error');
+            });
+        }
+function translateUserRole(role) {
+    switch (role) {
+        case 'STUDENT':
+            return 'Студент';
+        case 'TEACHER':
+            return 'Учитель';
+        case 'ADMIN':
+            return 'Администратор';
+        default:
+            return role;
+    }
+}
+
+        function createCommentElement(commentData) {
+            const commentDiv = document.createElement('div');
+            commentDiv.className = 'comment glass-effect';
+
+            const authorDiv = document.createElement('div');
+            authorDiv.className = 'comment-author';
+           authorDiv.innerHTML = `<i class="fas fa-user"></i> ${commentData.user.firstName}
+    <span class="comment-role">${translateUserRole(commentData.user.role)}</span>`;
+
+            const contentP = document.createElement('p');
+            contentP.className = 'comment-content';
+            contentP.textContent = commentData.content;
+
+            const dateP = document.createElement('p');
+            dateP.className = 'comment-date';
+            dateP.innerHTML = `<i class="far fa-clock"></i> ${commentData.createdAt}`;
+
+            const replyBtn = document.createElement('button');
+            replyBtn.className = 'reply-btn';
+            replyBtn.setAttribute('data-comment-id', commentData.id);
+            replyBtn.innerHTML = '<i class="fas fa-reply"></i> Ответить';
+
+            let deleteForm = null;
+            if (commentData.currentUserIsAdmin) {
+                deleteForm = document.createElement('form');
+                deleteForm.className = 'delete-comment-form';
+                deleteForm.action = `/lessons/${commentData.lesson.id}/comment/${commentData.id}/delete`;
+                deleteForm.method = 'post';
+                deleteForm.innerHTML = `
+                    <button type="submit" class="delete-btn" onclick="return confirm('Вы уверены, что хотите удалить этот комментарий?')">
+                        <i class="fas fa-trash"></i> Удалить
+                    </button>
+                `;
+            }
+
+            const replyForm = document.createElement('form');
+            replyForm.className = 'reply-form hidden';
+            replyForm.id = `reply-form-${commentData.id}`;
+            replyForm.action = `/lessons/${commentData.lesson.id}/comment/${commentData.id}/reply`;
+            replyForm.method = 'post';
+            replyForm.innerHTML = `
+                <textarea name="content" class="comment-textarea" placeholder="Напишите ваш ответ..." required></textarea>
+                <button type="submit" class="comment-submit-btn">
+                    <i class="fas fa-paper-plane"></i> Отправить ответ
+                </button>
+            `;
+            replyForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                submitCommentForm(this);
+            });
+
+            const nestedReplies = document.createElement('div');
+            nestedReplies.className = 'nested-replies';
+
+            commentDiv.appendChild(authorDiv);
+            commentDiv.appendChild(contentP);
+            commentDiv.appendChild(dateP);
+            commentDiv.appendChild(replyBtn);
+            if (deleteForm) commentDiv.appendChild(deleteForm);
+            commentDiv.appendChild(replyForm);
+            commentDiv.appendChild(nestedReplies);
+
+            return commentDiv;
+        }
+
+        function showCommentFeedback(message, type) {
+            const feedback = document.createElement('div');
+            feedback.className = `comment-feedback ${type}`;
+            feedback.innerHTML = `<i class="fas fa-${type === 'success' ? 'check' : 'exclamation-triangle'}"></i> ${message}`;
+            document.querySelector('.comments-section').prepend(feedback);
+
+            setTimeout(() => {
+                feedback.remove();
+            }, 3000);
+        }
+
+        function submitFeedback(isLiked) {
+            const lessonId = document.querySelector('input[name="lessonId"]').value;
+            const feedbackMessage = document.getElementById('feedback-message');
+
+            feedbackMessage.style.display = 'block';
+            feedbackMessage.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+            feedbackMessage.className = 'feedback-message processing';
+
+            fetch('/lessons/feedback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: `lessonId=${lessonId}&isLiked=${isLiked}`
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('likes-count').textContent = data.likes;
+                    document.getElementById('dislikes-count').textContent = data.dislikes;
+                    feedbackMessage.innerHTML = `<i class="fas fa-check"></i> ${data.message}`;
+                    feedbackMessage.className = 'feedback-message success';
+
+                    setTimeout(() => feedbackMessage.style.display = 'none', 3000);
+                } else {
+                    feedbackMessage.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${data.message}`;
+                    feedbackMessage.className = 'feedback-message error';
+                }
+            })
+            .catch(err => {
+                feedbackMessage.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Ошибка: ${err.message}`;
+                feedbackMessage.className = 'feedback-message error';
+            });
+        }
+
+    </script>
+
+</head>
+<body>
+<div class="container">
+    <header class="header glass-effect animate">
+        <a href="/" class="back-btn animate delay-1">
+            <i class="fas fa-arrow-left"></i> Назад
+        </a>
+    </header>
+
+    {{#message}}
+        <div class="feedback-message {{messageType}} animate delay-2">
+            <i class="fas fa-{{#success}}check-circle{{/success}}{{^success}}exclamation-circle{{/success}}"></i>
+            {{message}}
+        </div>
+    {{/message}}
+
+    <main class="lesson-container glass-effect">
+        <h1 class="lesson-title animate">{{lesson.title}}</h1>
+
+        <!-- Theory Section -->
+        <section class="section theory glass-effect animate delay-1">
+            <h2 class="section-title">
+                <i class="fas fa-book-open"></i> Теория
+            </h2>
+            <div class="theory-content">
+                {{{lesson.content}}}
+            </div>
+        </section>
+
+        <!-- Tasks Section -->
+        <section class="section tasks glass-effect animate delay-2">
+            <h2 class="section-title">
+                <i class="fas fa-tasks"></i> Задачи
+            </h2>
+            {{#tasks}}
+                {{#isCompleted}}
+                    <div class="task completed-task animate" id="task-{{id}}">
+                        <p class="task-title"><i class="fas fa-check-circle" style="color: var(--success);"></i> Задача "{{content}}" выполнена</p>
+                    </div>
+                {{/isCompleted}}
+                {{^isCompleted}}
+                    <div class="task animate" id="task-{{id}}">
+                        <form class="task-form ajax-form" action="/task/{{id}}" method="POST" data-task-id="{{id}}">
+                            <label class="task-title" for="userAnswer-{{id}}">{{content}}</label>
+                            <input type="text" name="userAnswer" id="userAnswer-{{id}}" class="task-input" required>
+
+                            <div class="feedback-message" id="feedback-task-{{id}}" style="display: none;">
+                                <i class="fas"></i>
+                                <span class="message-text"></span>
+                            </div>
+
+                            <button type="submit" class="task-btn">Ответить</button>
+                        </form>
+                    </div>
+                {{/isCompleted}}
+            {{/tasks}}
+        </section>
+
+        <!-- Tests Section -->
+        <section class="section tests glass-effect animate delay-3">
+            <h2 class="section-title">
+                <i class="fas fa-question-circle"></i> Тесты
+            </h2>
+            {{#tests}}
+                {{#isCompleted}}
+                    <div class="test completed-test animate" id="test-{{id}}">
+                        <p class="test-question"><i class="fas fa-check-circle" style="color: var(--success);"></i> Тест "{{question}}" выполнен</p>
+                    </div>
+                {{/isCompleted}}
+                {{^isCompleted}}
+                    <div class="test animate" id="test-{{id}}">
+                        <form class="ajax-form" action="/test/{{id}}" method="POST" data-test-id="{{id}}">
+                            <h3 class="test-question">{{question}}</h3>
+                            <div class="options-container">
+                                {{#options}}
+                                    <div class="test-option">
+                                        {{#isSingleChoice}}
+                                            <input type="radio" name="selectedOption" value="{{id}}" id="opt_{{id}}">
+                                        {{/isSingleChoice}}
+                                        {{^isSingleChoice}}
+                                            <input type="checkbox" name="selectedOptions" value="{{id}}" id="opt_{{id}}">
+                                        {{/isSingleChoice}}
+                                        <label for="opt_{{id}}">{{text}}</label>
+                                    </div>
+                                {{/options}}
+                            </div>
+
+                            <div class="feedback-message" id="feedback-test-{{id}}" style="display: none;">
+                                <i class="fas"></i>
+                                <span class="message-text"></span>
+                            </div>
+
+                            <button type="submit" class="test-submit-btn">Ответить</button>
+                        </form>
+                    </div>
+                {{/isCompleted}}
+            {{/tests}}
+        </section>
+
+        <!-- Feedback Section -->
+        <section class="feedback-section glass-effect animate delay-4">
+            <h2 class="feedback-title">Оцените урок</h2>
+            <div class="feedback-stats">
+                <div class="feedback-stat likes">
+                    <i class="fas fa-thumbs-up"></i>
+                    <span id="likes-count">{{likes}}</span>
+                </div>
+                <div class="feedback-stat dislikes">
+                    <i class="fas fa-thumbs-down"></i>
+                    <span id="dislikes-count">{{dislikes}}</span>
+                </div>
+            </div>
+            <form id="feedback-form" method="post">
+                <input type="hidden" name="lessonId" value="{{lesson.id}}">
+                <div class="feedback-buttons">
+                    <button type="button" class="feedback-btn like-btn" onclick="submitFeedback(true)">
+                        <i class="fas fa-thumbs-up"></i> Лайк
+                    </button>
+                    <button type="button" class="feedback-btn dislike-btn" onclick="submitFeedback(false)">
+                        <i class="fas fa-thumbs-down"></i> Дизлайк
+                    </button>
+                </div>
+            </form>
+            <div id="feedback-message" class="feedback-message" style="display: none;"></div>
+        </section>
+
+        <!-- Comments Section -->
+        <section class="comments-section glass-effect animate delay-5">
+            <h2 class="comments-title">
+                <i class="fas fa-comments"></i> Комментарии
+            </h2>
+
+            <!-- Comment Form -->
+            <form class="comment-form" action="/lessons/{{lesson.id}}/comment" method="post">
+                <textarea name="content" class="comment-textarea" placeholder="Напишите ваш комментарий..." required></textarea>
+                <button type="submit" class="comment-submit-btn">
+                    <i class="fas fa-paper-plane"></i> Оставить комментарий
+                </button>
+            </form>
+
+            <!-- Comments List -->
+            <div class="comments-list">
+                {{#comments}}
+                    <div class="comment glass-effect">
+                        <div class="comment-author">
+                            <i class="fas fa-user"></i>
+                            {{user.firstName}}
+                            <span class="comment-role">
+                                {{#user.role}}
+                                    {{#isStudent}}Студент{{/isStudent}}
+                                    {{#isTeacher}}Учитель{{/isTeacher}}
+                                    {{^isStudent}}{{^isTeacher}}{{user.role}}{{/isTeacher}}{{/isStudent}}
+                                {{/user.role}}
+                            </span>
+                        </div>
+                        <p class="comment-content">{{content}}</p>
+                        <p class="comment-date">
+                            <i class="far fa-clock"></i>
+                            {{createdAt}}
+                        </p>
+                        <button class="reply-btn" data-comment-id="{{id}}">
+                            <i class="fas fa-reply"></i> Ответить
+                        </button>
+                        {{#currentUserIsAdmin}}
+                            <form class="delete-comment-form" action="/lessons/{{lesson.id}}/comment/{{id}}/delete" method="post" style="display: inline;">
+                                <button type="submit" class="delete-btn" onclick="return confirm('Вы уверены, что хотите удалить этот комментарий?')">
+                                    <i class="fas fa-trash"></i> Удалить
+                                </button>
+                            </form>
+                            {{/currentUserIsAdmin}}
+
+                        <!-- Reply Form -->
+                        <form id="reply-form-{{id}}" class="reply-form hidden" action="/lessons/{{lesson.id}}/comment/{{id}}/reply" method="post">
+                            <textarea name="content" class="comment-textarea" placeholder="Напишите ваш ответ..." required></textarea>
+                            <button type="submit" class="comment-submit-btn">
+                                <i class="fas fa-paper-plane"></i> Отправить ответ
+                            </button>
+                        </form>
+
+                        <!-- Replies -->
+                        <div class="nested-replies">
+                            {{#replies}}
+                                <div class="comment glass-effect">
+                                    <div class="comment-author">
+                                        <i class="fas fa-user"></i>
+                                        {{user.firstName}}
+                                        <span class="comment-role">
+                                            {{#user.role}}
+                                                {{#isStudent}}Студент{{/isStudent}}
+                                                {{#isTeacher}}Учитель{{/isTeacher}}
+                                                {{^isStudent}}{{^isTeacher}}{{user.role}}{{/isTeacher}}{{/isStudent}}
+                                            {{/user.role}}
+                                        </span>
+                                    </div>
+                                    <p class="comment-content">{{content}}</p>
+                                    <p class="comment-date">
+                                        <i class="far fa-clock"></i>
+                                        {{createdAt}}
+                                    </p>
+                                    <button class="reply-btn" data-comment-id="{{id}}-reply">
+                                        <i class="fas fa-reply"></i> Ответить
+                                    </button>
+                                    {{#currentUserIsAdmin}}
+                                        <form class="delete-comment-form" action="/lessons/{{lesson.id}}/comment/{{id}}/delete" method="post" style="display: inline;">
+                                            <button type="submit" class="delete-btn" onclick="return confirm('Вы уверены, что хотите удалить этот комментарий?')">
+                                                <i class="fas fa-trash"></i> Удалить
+                                            </button>
+                                        </form>
+                                        {{/currentUserIsAdmin}}
+
+
+                                    <!-- Reply Form -->
+                                    <form id="reply-form-{{id}}-reply" class="reply-form hidden" action="/lessons/{{lesson.id}}/comment/{{id}}/reply" method="post">
+                                        <textarea name="content" class="comment-textarea" placeholder="Напишите ваш ответ..." required></textarea>
+                                        <button type="submit" class="comment-submit-btn">
+                                            <i class="fas fa-paper-plane"></i> Отправить ответ
+                                        </button>
+                                    </form>
+
+                                    <!-- Nested Replies -->
+                                    <div class="nested-replies">
+                                        {{#replies}}
+                                            <div class="comment glass-effect">
+                                                <div class="comment-author">
+                                                    <i class="fas fa-user"></i>
+                                                    {{user.firstName}}
+                                                    <span class="comment-role">{{user.role}}</span>
+                                                </div>
+                                                <p class="comment-content">{{content}}</p>
+                                                <p class="comment-date">
+                                                    <i class="far fa-clock"></i>
+                                                    {{createdAt}}
+                                                </p>
+                                                <button class="reply-btn" data-comment-id="{{id}}-reply2">
+                                                    <i class="fas fa-reply"></i> Ответить
+                                                </button>
+                                                {{#user.role}}
+                                                    {{#isAdmin}}
+                                                        <form class="delete-comment-form" action="/lessons/{{lesson.id}}/comment/{{id}}/delete" method="post" style="display: inline;">
+                                                            <button type="submit" class="delete-btn" onclick="return confirm('Вы уверены, что хотите удалить этот комментарий?')">
+                                                                <i class="fas fa-trash"></i> Удалить
+                                                            </button>
+                                                        </form>
+                                                    {{/isAdmin}}
+                                                {{/user.role}}
+                                                <!-- Reply Form -->
+                                                <form id="reply-form-{{id}}-reply2" class="reply-form hidden" action="/lessons/{{lesson.id}}/comment/{{id}}/reply" method="post">
+                                                    <textarea name="content" class="comment-textarea" placeholder="Напишите ваш ответ..." required></textarea>
+                                                    <button type="submit" class="comment-submit-btn">
+                                                        <i class="fas fa-paper-plane"></i> Отправить ответ
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        {{/replies}}
+                                    </div>
+                                </div>
+                            {{/replies}}
+                        </div>
+                    </div>
+                {{/comments}}
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Статистика Учителя</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Подключение Chart.js -->
+    <style>
+        /* Подключаем шрифт Montserrat */
+ @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+ /* Общие стили */
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Montserrat', sans-serif;
+ }
+
+ /* Стиль для body */
+ body {
+     background-color: #f4f4f9;
+     color: #333;
+     font-size: 16px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     padding: 20px;
+     min-height: 100vh;
+     background-image: url('../src/blur_fon.jpg');
+     background-size: cover;
+     background-position: center;
+     background-repeat: no-repeat;
+ }
+
+ /* Заголовки */
+ h1 {
+     color: #380470;
+     font-weight: 700;
+     text-align: center;
+     margin-bottom: 30px;
+     font-size: 36px;
+     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+     animation: fadeIn 1.5s ease-in-out;
+ }
+
+ h2 {
+     font-size: 24px;
+     color: #333;
+     margin-bottom: 15px;
+     text-align: center;
+     font-weight: 600;
+ }
+
+ /* Общая статистика */
+ .total-stats {
+     background-color: #fff;
+     padding: 25px;
+     border-radius: 12px;
+     box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15);
+     width: 100%;
+     max-width: 800px;
+     margin-bottom: 30px;
+     text-align: center;
+     transition: transform 0.3s;
+ }
+
+ .total-stats:hover {
+     transform: translateY(-5px);
+ }
+
+ .total-stats p {
+     font-size: 18px;
+     color: #555;
+     margin: 10px 0;
+     font-weight: 500;
+ }
+
+ canvas {
+     max-width: 200px;
+     max-height: 200px;
+     margin: 0 auto;
+     display: block;
+ }
+
+ /* Таблица */
+ table {
+     width: 100%;
+     max-width: 1000px;
+     margin: 0 auto;
+     border-collapse: collapse;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     background-color: #fff;
+     border-radius: 10px;
+     overflow: hidden;
+ }
+
+ th, td {
+     padding: 12px 15px;
+     text-align: center;
+     border-bottom: 1px solid #ddd;
+ }
+
+ th {
+     background-color: #6a0dad;
+     color: #fff;
+     font-weight: 600;
+ }
+
+ tr:nth-child(even) {
+     background-color: #f9f9f9;
+ }
+
+ tr:hover {
+     background-color: #f1f1f1;
+ }
+
+ .positive {
+     color: #28a745;
+     font-weight: 600;
+ }
+
+ .negative {
+     color: #dc3545;
+     font-weight: 600;
+ }
+
+ .neutral {
+     color: #6c757d;
+     font-weight: 600;
+ }
+
+ /* Кнопка "Назад" */
+ .back-link {
+     position: absolute;
+     top: 20px;
+     left: 20px;
+     text-decoration: none;
+     padding: 10px 20px;
+     background-color: #8b00ff;
+     color: white;
+     border-radius: 8px;
+     font-weight: 600;
+     font-size: 16px;
+     transition: all 0.3s ease-in-out;
+ }
+
+ .back-link:hover {
+     background-color: #5d00b3;
+     transform: scale(1.05);
+ }
+
+ /* Анимации */
+ @keyframes fadeIn {
+     0% {
+         opacity: 0;
+         transform: translateY(-20px);
+     }
+     100% {
+         opacity: 1;
+         transform: translateY(0);
+     }
+ }
+
+ /* Адаптивность */
+ @media (max-width: 768px) {
+     h1 {
+         font-size: 28px;
+     }
+
+     .total-stats p {
+         font-size: 16px;
+     }
+
+     table {
+         font-size: 14px;
+     }
+
+     th, td {
+         padding: 8px;
+     }
+ }
+
+ @media (max-width: 480px) {
+     h1 {
+         font-size: 22px;
+     }
+
+     .total-stats p {
+         font-size: 14px;
+     }
+
+     .back-link {
+         font-size: 14px;
+         padding: 8px 15px;
+     }
+ }
+
+    </style>
+</head>
+
+<body>
+<h1>Статистика Учителя</h1>
+
+<!-- Общая статистика -->
+<div class="total-stats">
+    <h2>Общая статистика</h2>
+    <p><strong>Лайки:</strong> {{totalLikes}}</p>
+    <p><strong>Дизлайки:</strong> {{totalDislikes}}</p>
+    <p><strong>Общий рейтинг:</strong> {{totalRating}}</p>
+    <canvas id="totalChart" width="150" height="150"></canvas>
+</div>
+
+<script>
+    // Создание диаграммы для общей статистики
+    var ctxTotal = document.getElementById("totalChart").getContext("2d");
+    new Chart(ctxTotal, {
+        type: 'pie',
+        data: {
+            labels: ['Лайки', 'Дизлайки'],
+            datasets: [{
+                data: [{{totalLikes}}, {{totalDislikes}}],
+                backgroundColor: ['#28a745', '#dc3545'],
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            size: 10,
+                        }
+                    }
+                }
+            }
+        });
+</script>
+
+<!-- Статистика по каждому уроку -->
+<h2>Статистика по урокам</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Урок</th>
+        <th>Лайки</th>
+        <th>Дизлайки</th>
+        <th>Общий рейтинг</th>
+        <th>Диаграмма</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#statistics}}
+        <tr>
+            <td>{{lesson.title}}</td>
+            <td>{{totalLikes}}</td>
+            <td>{{totalDislikes}}</td>
+            <td class="
+                {{#isPositive}}positive{{/isPositive}}
+                {{#isNegative}}negative{{/isNegative}}
+                {{^isPositive}}{{^isNegative}}neutral{{/isNegative}}{{/isPositive}}
+            ">
+                {{totalRating}}
+            </td>
+            <!-- Диаграмма для конкретного урока -->
+            <td><canvas id="chart-{{lesson.id}}" width="150" height="150"></canvas></td>
+        </tr>
+    {{/statistics}}
+    </tbody>
+</table>
+<a href="/profile" class="back-link">Назад</a>
+
+<script>
+    // Инициализация диаграмм для каждого урока
+    {{#statistics}}
+        var ctx = document.getElementById("chart-{{lesson.id}}").getContext("2d");
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Лайки', 'Дизлайки'],
+                datasets: [{
+                    data: [{{totalLikes}}, {{totalDislikes}}],
+                    backgroundColor: ['#28a745', '#dc3545'],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 10,
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    {{/statistics}}
+</script>
+
+</body>
+</html>

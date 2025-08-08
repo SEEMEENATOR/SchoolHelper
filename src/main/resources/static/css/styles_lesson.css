@@ -1,0 +1,220 @@
+/* Подключаем шрифт Montserrat */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Стиль для body */
+body {
+    background-color: #f4f4f9;
+    color: #333;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 20px;
+    height: 100vh;
+    background-image: url('../src/blur_fon.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Контейнер для контента */
+.container {
+    width: 100%;
+    max-width: 1200px; /* Ограничиваем максимальную ширину */
+    margin: 0 auto; /* Центрируем контейнер */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Заголовок страницы */
+h1 {
+    color: #380470;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 32px;
+}
+
+/* Контейнер для каждого урока */
+.lesson {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+
+}
+.delete-btn {
+    background-color: #ff4d4d; /* Красный цвет */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #ff1a1a; /* Темный красный на hover */
+}
+
+.delete-btn:active {
+    background-color: #e60000; /* Еще более темный красный при клике */
+}
+
+/* Заголовок урока */
+.lesson h2 {
+    color: #380470;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Заголовки секций задач и тестов */
+.lesson h3 {
+    color: #5A0DAC;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+/* Список задач и тестов */
+ul {
+    list-style-type: none;
+    margin-left: 20px;
+}
+
+/* Элементы списка */
+li {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Ссылка на редактирование */
+a {
+    color: #5A0DAC;
+    text-decoration: none;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Когда нет задач или тестов */
+li:empty {
+    color: #7f89a1;
+}
+
+/* Сообщение о том, что нет уроков */
+p {
+    text-align: center;
+    color: #7f89a1;
+    font-size: 18px;
+    margin-top: 40px;
+}
+
+/* Стили для кнопок */
+button {
+    background-color: #5A0DAC; /* Фиолетовый фон */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #4c51bf;
+}
+
+/* Адаптивность для мобильных устройств */
+
+/* Для экранов шириной до 768px */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    .lesson {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .lesson h2 {
+        font-size: 22px;
+    }
+
+    .lesson h3 {
+        font-size: 18px;
+    }
+
+    li {
+        font-size: 14px;
+    }
+
+    a {
+        font-size: 12px;
+    }
+}
+
+/* Для экранов шириной до 480px */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    .lesson {
+        padding: 10px;
+    }
+
+    .lesson h2 {
+        font-size: 20px;
+    }
+
+    .lesson h3 {
+        font-size: 16px;
+    }
+
+    li {
+        font-size: 12px;
+    }
+
+    a {
+        font-size: 10px;
+    }
+}
+.back-link {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            text-decoration: none;
+            padding: 10px 15px;
+            background-color: #8b00ff;
+            color: white;
+            border-radius: 5px;
+            font-weight: 500;
+            font-size:24px;
+            transition: background-color 0.3s;
+        }
+
+        .back-link:hover {
+            background-color: #0056b3;
+        }

@@ -1,0 +1,54 @@
+HELP.md
+
+.gradle/
+build/
+target/
+out/
+logs/
+*.log
+*.log.*
+*.tmp
+*.swp
+*.bak
+*.old
+*.orig
+*.class
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+*.db
+*.sql
+*.csv
+*.json
+*.xlsx
+*.xls
+*.pdf
+*.docx
+
+# STS
+.apt_generated/
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache/
+bin/
+
+# IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VSCode
+.vscode/

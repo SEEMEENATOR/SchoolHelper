@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="/css/styles_profile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .username {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-image {
+            position: relative;
+            display: inline-block;
+            width: 150px;
+            height: 170px;
+            overflow: hidden;
+            border-radius: 50%;
+        }
+
+        .profile-image img {
+            object-fit: cover;
+            cursor: pointer;
+            margin: 0;
+            padding: 0;
+        }
+
+        .edit-overlay {
+            position: absolute;
+            height: 170px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+
+        .profile-image:hover .edit-overlay {
+            opacity: 1;
+        }
+
+        #save_changes {
+            margin-top: 10px;
+            display: block;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="menu-column">
+        {{#studentProfile}}
+            <h2>Меню</h2>
+            <ul>
+                <li><a href="/profile">Мой профиль</a></li>
+                <li><a href="/student/statistics">Статистика</a></li>
+                <li>  <a href="/teachers">Учителя</a></li>
+                <li><a href="/">Главная</a> </li>
+                <li><a href="/login">Выйти</a></li>
+            </ul>
+
+        {{/studentProfile}}
+        {{#teacherProfile}}
+            <h2>Меню</h2>
+            <ul>
+                <li><a href="/profile">Мой профиль</a></li>
+                <li><a href="/teachers">Учителя</a></li>
+                <li><a href="/teacher/lessons">Мои Уроки</a></li>
+                <li><a href="/teacher/statistics">Статистика</a></li>
+                <li><a href="/teacher/lessons/add">Добавление урока</a></li>
+                <li><a href="/">Главная</a> </li>
+                <li><a href="/login">Выйти</a></li>
+            </ul>
+        {{/teacherProfile}}
+        {{#admin}}
+            <h2>Меню</h2>
+            <ul>
+                <li><a href="/admin/approve-teachers">Подтверждение учителей</a></li>
+                <li><a href="/admin/sections">Добавление разделов</a></li>
+                <li>  <a href="/admin/blockPage">Блокировка пользователей</a></li>
+                <li><a href="/">Главная</a> </li>
+                <li><a href="/login">Выйти</a></li>
+            </ul>
+
+        {{/admin}}
+    </div>
+
+    <div class="content-column">
+        <div class="left-column">
+            <h1>Редактировать профиль</h1>
+            <div class="username">
+                <p>Логин: <strong>{{user.username}}</strong></p>
+            </div>
+            <form action="/profile/edit" method="post" enctype="multipart/form-data">
+                <div class="form-group profile-image">
+                    <input type="file" name="image" accept="image/*" id="imageInput" style="display:none;" />
+                    <p>
+                        {{#base64Image}}
+                            <img src="data:image/png;base64,{{.}}" alt="Profile Image" onclick="document.getElementById('imageInput').click();" />
+                        {{/base64Image}}
+                        {{^base64Image}}
+                            <img src="default-image.png" alt="Profile Image" onclick="document.getElementById('imageInput').click();" />
+                        {{/base64Image}}
+                        <span class="edit-overlay" onclick="document.getElementById('imageInput').click();">Редактировать</span>
+                    </p>
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Имя:</label>
+                    <input type="text" name="firstName" value="{{user.firstName}}" required />
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Фамилия:</label>
+                    <input type="text" name="lastName" value="{{user.lastName}}" required />
+                </div>
+                <div class="form-group">
+                    <label for="bio">Описание:</label>
+                    <textarea name="bio">{{user.bio}}</textarea>
+                </div>
+                <button type="submit" id="save_changes">Сохранить изменения</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('imageInput').addEventListener('change', function(event) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const img = document.querySelector('.profile-image img');
+            img.src = reader.result;
+        }
+        reader.readAsDataURL(this.files[0]);
+    });
+</script>
+</body>
+</html>

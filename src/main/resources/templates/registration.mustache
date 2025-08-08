@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style_registration.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="image-section">
+        <img src="/src/registration.png" alt="Изображение регистрации">
+    </div>
+    <div class="registration-form">
+        <h2>Регистрация</h2>
+        <form action="/registration" method="POST">
+            <input type="text" id="username" name="username" placeholder="Имя пользователя" required>
+            {{#usernameError}}<div style="color: red;">{{usernameError}}</div>{{/usernameError}}
+
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            {{#emailError}}<div style="color: red;">{{emailError}}</div>{{/emailError}}
+
+            <input type="password" id="password" name="password" placeholder="Пароль" required>
+            {{#passwordError}}<div style="color: red;">{{passwordError}}</div>{{/passwordError}}
+
+            <div class="role-selection">
+                <p class="role-title">Выберите роль:</p>
+                <div class="role-options">
+                    <div class="role-card" data-role="TEACHER">
+                        <h3>👩‍🏫 Учитель</h3>
+                        <p>Создавайте и публикуйте уроки, получайте отзывы.</p>
+                        <p>*Требуется подтверждение</p>
+                    </div>
+                    <div class="role-card" data-role="STUDENT">
+                        <h3>🧑‍🎓 Ученик</h3>
+                        <p>Проходите уроки, выполняйте задания и отслеживайте свой прогресс.</p>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" id="role" name="role" required>
+
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            <button type="submit">Зарегистрироваться</button>
+
+            <p>Если у вас уже есть аккаунт, <a href="/login">войдите</a>.</p>
+        </form>
+    </div>
+</div>
+<!-- ... -->
+
+</div> <!-- конец .container -->
+
+<!-- Переместили скрипт сюда -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const cards = document.querySelectorAll('.role-card');
+        const roleInput = document.getElementById('role');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                cards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                roleInput.value = card.dataset.role;
+            });
+        });
+    });
+</script>
+</body>
+</html>
+
+</body>
+</html>

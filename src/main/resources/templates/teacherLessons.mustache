@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ваши уроки</title>
+    <!-- Ссылка на внешний CSS файл -->
+    <link rel="stylesheet" href="/css/styles_lesson.css">
+    <!-- Подключение шрифта Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<a href="/profile" class="back-link">Назад</a>
+
+<h1>Ваши уроки</h1>
+{{#lessons}}
+    <div class="lesson">
+        <h2>{{title}}</h2>
+
+        <h3>Задачи</h3>
+        <ul>
+            {{#tasks}}
+                <li>
+                    {{content}}
+                    <a href="/teacher/tasks/edit/{{id}}">Редактировать</a>
+                </li>
+            {{/tasks}}
+            {{^tasks}}
+                <li>Нет задач</li>
+            {{/tasks}}
+        </ul>
+
+        <h3>Тесты</h3>
+        <ul>
+            {{#tests}}
+                <li>
+                    {{question}}
+                    <a href="/teacher/tests/edit/{{id}}">Редактировать</a>
+                </li>
+            {{/tests}}
+            {{^tests}}
+                <li>Нет тестов</li>
+            {{/tests}}
+        </ul>
+        <form action="/teacher/lessons/delete/{{id}}" method="post">
+            <button type="submit" class="delete-btn">Удалить урок</button>
+        </form>
+    </div>
+{{/lessons}}
+{{^lessons}}
+    <p>У вас нет уроков.</p>
+{{/lessons}}
+</body>
+</html>

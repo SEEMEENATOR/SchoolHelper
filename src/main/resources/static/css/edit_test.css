@@ -1,0 +1,85 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center;    /* Центрирование по вертикали */
+    height: 100vh;          /* Высота экрана */
+    background-image: url('../src/blur_fon.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Контейнер формы */
+form {
+    background-color: #fff; /* Белый фон */
+    width: 100%;
+    max-width: 600px;       /* Ограничение ширины */
+    padding: 30px;          /* Внутренние отступы */
+    border-radius: 8px;     /* Скругленные углы */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень */
+}
+
+/* Стили для меток */
+label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Поля ввода и текстовые области */
+textarea, input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc; /* Граница */
+    border-radius: 5px;     /* Скругленные углы */
+    margin-bottom: 20px;    /* Отступ между элементами */
+    resize: none;           /* Отключаем изменение размера у текстовых областей */
+}
+
+textarea:focus, input[type="text"]:focus {
+    border-color: #5A0DAC; /* Подсветка границы при фокусе */
+    outline: none;         /* Убираем стандартное обрамление */
+}
+
+/* Кнопка */
+button {
+    display: inline-block;
+    width: 100%;           /* Кнопка на всю ширину */
+    padding: 10px 15px;
+    background-color: #5A0DAC; /* Основной цвет */
+    color: #fff;           /* Белый текст */
+    font-size: 16px;
+    font-weight: 500;
+    border: none;          /* Убираем границы */
+    border-radius: 5px;    /* Скругленные углы */
+    cursor: pointer;       /* Указатель */
+    transition: background-color 0.3s ease; /* Анимация */
+}
+
+button:hover {
+    background-color: #4e09b3; /* Более темный цвет при наведении */
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    form {
+        padding: 20px;
+        max-width: 90%; /* Уменьшаем ширину формы */
+    }
+
+    button {
+        font-size: 14px; /* Уменьшаем размер шрифта */
+    }
+}

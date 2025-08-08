@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подтверждение учителей</title>
+    <link rel="stylesheet" href="/css/styles_approveTeacher.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .teacher-card {
+            border: 1px solid #ddd;
+            padding: 16px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .approved { color: green; }
+        .not-approved { color: red; }
+        .verified { color: #4CAF50; }
+        .not-verified { color: #FF9800; }
+        .certificate-image {
+            max-width: 100%;
+            max-height: 300px;
+            margin: 10px auto;
+            border: 1px solid #ddd;
+            display: block;
+        }
+        .certificate-text {
+            max-height: 150px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .back-link:hover {
+            background-color: #0056b3;
+        }
+        .btn {
+            padding: 8px 16px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .btn-approve {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .btn-reject {
+            background-color: #f44336;
+            color: white;
+        }
+        .btn-view {
+            background-color: #2196F3;
+            color: white;
+        }
+        #filter-form {
+            background-color: #ffffffee;
+            border-radius: 10px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        }
+        #filter-form input[type="text"]::placeholder {
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+<a href="/profile" class="back-link">Назад</a>
+<div class="container">
+    <h1>Подтверждение учителей</h1>
+    <form id="filter-form" style="margin-bottom: 30px; display: flex; flex-wrap: wrap; align-items: center; gap: 15px;">
+        <input
+                type="text"
+                name="search"
+                placeholder="Поиск по имени или фамилии..."
+                value="{{search}}"
+                id="search-input"
+                style="flex: 1; min-width: 200px; padding: 10px 15px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px;"
+        >
+        <label style="display: flex; align-items: center; gap: 8px; font-size: 16px; color: #333;">
+            <input
+                    type="checkbox"
+                    name="sort"
+                    value="true"
+                    id="sort-checkbox"
+                    {{#sort}}checked{{/sort}}
+                    style="width: 18px; height: 18px;"
+            >
+            Сначала проверенные системой
+        </label>
+    </form>
+
+
+    <!-- Контейнер для списка учителей -->
+    <div id="teachers-list">
+        {{> approveTeachersList}}
+    </div>
+</div>
+
+<script>
+    let debounceTimeout;
+
+    // Добавляем обработчик события input на поле поиска
+    document.getElementById('search-input').addEventListener('input', submitForm);
+
+    // Добавляем обработчик для чекбокса сортировки
+    document.getElementById('sort-checkbox').addEventListener('change', submitForm);
+
+    // Функция для отправки запроса без перезагрузки страницы
+    function submitForm() {
+        clearTimeout(debounceTimeout);
+
+        debounceTimeout = setTimeout(() => {
+            // Собираем данные формы
+            const searchValue = document.getElementById('search-input').value;
+            const sortChecked = document.getElementById('sort-checkbox').checked;
+
+            // Отправляем запрос на сервер через Fetch API
+            fetch(`/admin/approve-teachers/list?search=${encodeURIComponent(searchValue)}&sort=${sortChecked}`)
+                .then(response => response.text())  // Получаем только HTML-разметку списка учителей
+                .then(html => {
+                    document.getElementById('teachers-list').innerHTML = html;  // Вставляем новый список учителей
+                })
+                .catch(error => {
+                    console.error('Ошибка при загрузке данных:', error);
+                });
+        }, 300); // Задержка 300 мс, чтобы не отправлять запросы слишком часто
+    }
+function toggleCertificate(button) {
+    const container = button.nextElementSibling;
+    if (!container) return;
+
+    const isVisible = container.classList.contains('show');
+    container.classList.toggle('show');
+    button.textContent = isVisible ? 'Показать сертификат' : 'Скрыть сертификат';
+}
+
+
+</script>
+
+</body>
+</html>
